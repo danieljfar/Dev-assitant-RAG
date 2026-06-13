@@ -35,3 +35,22 @@ export interface SearchResult {
     chunks: Chunk;
     score: number;
 }
+export type ModelProvider = "anthropic" | "openai";
+
+export interface AppConfig {
+    provider: ModelProvider;
+    openaiApiKey: string;
+    anthropicApiKey: string;
+    anthropicModel: string;
+    openaiEmbeddingModel: string;
+    docsPath: string;
+    dbPath: string;
+    rangTopK: number;
+}
+
+export interface AgentResponse {
+    text: string;
+    toolsUsed: string[];
+    inputTokens: number;
+    outputTokens: number;
+}
