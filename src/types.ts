@@ -42,10 +42,11 @@ export interface AppConfig {
     openaiApiKey: string;
     anthropicApiKey: string;
     anthropicModel: string;
+    openaiModel: string;
     openaiEmbeddingModel: string;
     docsPath: string;
     dbPath: string;
-    rangTopK: number;
+    ragTopK: number;
 }
 
 export interface AgentResponse {
