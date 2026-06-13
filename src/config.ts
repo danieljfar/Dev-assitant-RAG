@@ -48,3 +48,5 @@ export function validateConfig(): void {
             throw new Error(`Invalid provider: ${config.provider}`);
     }
 }
+
+export default config;
