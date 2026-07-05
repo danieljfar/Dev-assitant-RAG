@@ -1,5 +1,5 @@
 import config from "../config.js";
-import { client } from "../llm/anthropic.client.js";
+import { client } from "../llm/anthropic-client.js";
 import { Message } from "../types.js";
 
 const CHARS_PER_TOKEN = 4;

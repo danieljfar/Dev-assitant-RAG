@@ -3,7 +3,7 @@ export interface Message {
     role: String;
     content: String;
 }
-export interface toolDefinition {
+export interface ToolDefinition {
     name: string;
     description: string;
     input_schema: {
@@ -12,7 +12,7 @@ export interface toolDefinition {
         required?: string[];
     }
 }
-export interface toolResult {
+export interface ToolResult {
     toolName: string;
     toolUseId: string;
     result: string;

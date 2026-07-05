@@ -1,5 +1,5 @@
 import config from "../config.js";
-import { client } from "./anthropic.client.js";
+import { client } from "./anthropic-client.js";
 
 export async function streamClaude(prompt: string, systemPrompt?: string): Promise<string> {
     let fullResponse = "";

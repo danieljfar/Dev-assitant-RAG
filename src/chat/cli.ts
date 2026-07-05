@@ -1,6 +1,6 @@
 import * as readline from "readline";
 import { Conversation } from "./conversation.js";
-import { client } from "../llm/anthropic.client.js";
+import { client } from "../llm/anthropic-client.js";
 import config from "../config.js";
 import { DOCUMENTATION_ASSISTANT_PROMPT } from "../llm/prompts.js";
 
