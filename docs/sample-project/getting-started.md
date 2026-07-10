@@ -97,7 +97,7 @@ class TaskFlowClient {
     const response = await fetch(`${this.baseURL}${path}`, {
       ...options,
       headers: {
-        "Authorization": `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.accessToken}`,
         "Content-Type": "application/json",
         ...options.headers,
       },
@@ -133,12 +133,12 @@ Los webhooks permiten que TaskFlow notifique a tu aplicación cuando ocurren eve
 
 ### Eventos disponibles
 
-| Evento | Descripción |
-|--------|-------------|
-| `task.created` | Se creó una nueva tarea |
-| `task.updated` | Se actualizó una tarea |
-| `task.completed` | Una tarea pasó a estado `done` |
-| `task.deleted` | Se eliminó una tarea |
+| Evento                 | Descripción                      |
+| ---------------------- | -------------------------------- |
+| `task.created`         | Se creó una nueva tarea          |
+| `task.updated`         | Se actualizó una tarea           |
+| `task.completed`       | Una tarea pasó a estado `done`   |
+| `task.deleted`         | Se eliminó una tarea             |
 | `project.member.added` | Se agregó un miembro al proyecto |
 
 ### Configurar un webhook
@@ -162,10 +162,12 @@ Cada request de webhook incluye un header `X-TaskFlow-Signature` con un HMAC-SHA
 ```typescript
 import { createHmac } from "crypto";
 
-function verifyWebhook(body: string, signature: string, secret: string): boolean {
-  const expected = createHmac("sha256", secret)
-    .update(body)
-    .digest("hex");
+function verifyWebhook(
+  body: string,
+  signature: string,
+  secret: string,
+): boolean {
+  const expected = createHmac("sha256", secret).update(body).digest("hex");
 
   return `sha256=${expected}` === signature;
 }
@@ -176,7 +178,7 @@ app.post("/webhooks/taskflow", (req, res) => {
   const isValid = verifyWebhook(
     JSON.stringify(req.body),
     signature,
-    process.env.WEBHOOK_SECRET!
+    process.env.WEBHOOK_SECRET!,
   );
 
   if (!isValid) {
@@ -274,7 +276,9 @@ async function getAllTasks(projectId) {
     });
 
     allTasks.push(...result.data);
-    cursor = result.pagination.hasMore ? result.pagination.nextCursor : undefined;
+    cursor = result.pagination.hasMore
+      ? result.pagination.nextCursor
+      : undefined;
   } while (cursor);
 
   return allTasks;
@@ -293,7 +297,7 @@ async function requestWithRetry(url, options, maxRetries = 3) {
     if (response.status === 429) {
       const retryAfter = parseInt(response.headers.get("Retry-After") || "60");
       console.log(`Rate limit alcanzado. Esperando ${retryAfter}s...`);
-      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
       continue;
     }
 
@@ -311,7 +315,7 @@ Los access tokens duran 15 minutos. Cuando recibes un `401 Unauthorized`, usa el
 const { accessToken } = await fetch("/v1/auth/refresh", {
   method: "POST",
   body: JSON.stringify({ refreshToken: myRefreshToken }),
-}).then(r => r.json());
+}).then((r) => r.json());
 ```
 
 Los refresh tokens duran 7 días. Si también expira el refresh token, el usuario debe hacer login de nuevo.

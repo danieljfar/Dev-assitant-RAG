@@ -96,16 +96,16 @@ Content-Type: application/json
 
 ```typescript
 interface Task {
-  id: string;              // "tsk_01HXYZ123"
-  title: string;           // Máximo 255 caracteres
-  description?: string;    // Máximo 10,000 caracteres (Markdown)
+  id: string; // "tsk_01HXYZ123"
+  title: string; // Máximo 255 caracteres
+  description?: string; // Máximo 10,000 caracteres (Markdown)
   status: "todo" | "in_progress" | "done" | "cancelled";
   priority: "low" | "medium" | "high" | "urgent";
-  projectId?: string;      // Referencia al proyecto
-  assigneeId?: string;     // Usuario asignado
-  creatorId: string;       // Usuario que creó la tarea
-  dueDate?: string;        // ISO 8601: "2024-03-15T17:00:00Z"
-  tags: string[];          // ["backend", "bug", "frontend"]
+  projectId?: string; // Referencia al proyecto
+  assigneeId?: string; // Usuario asignado
+  creatorId: string; // Usuario que creó la tarea
+  dueDate?: string; // ISO 8601: "2024-03-15T17:00:00Z"
+  tags: string[]; // ["backend", "bug", "frontend"]
   createdAt: string;
   updatedAt: string;
 }
@@ -122,17 +122,17 @@ Authorization: Bearer {token}
 
 **Query parameters:**
 
-| Parámetro | Tipo | Descripción |
-|-----------|------|-------------|
-| `status` | string | Filtrar por estado: `todo`, `in_progress`, `done`, `cancelled` |
-| `priority` | string | Filtrar por prioridad: `low`, `medium`, `high`, `urgent` |
-| `projectId` | string | Filtrar por proyecto |
-| `assigneeId` | string | Filtrar por usuario asignado |
-| `tags` | string | Filtrar por tags (comma-separated): `bug,frontend` |
-| `limit` | number | Resultados por página (1-100, default: 20) |
-| `cursor` | string | Cursor para paginación |
-| `sortBy` | string | Campo de ordenamiento: `createdAt`, `dueDate`, `priority` |
-| `sortOrder` | string | `asc` o `desc` (default: `desc`) |
+| Parámetro    | Tipo   | Descripción                                                    |
+| ------------ | ------ | -------------------------------------------------------------- |
+| `status`     | string | Filtrar por estado: `todo`, `in_progress`, `done`, `cancelled` |
+| `priority`   | string | Filtrar por prioridad: `low`, `medium`, `high`, `urgent`       |
+| `projectId`  | string | Filtrar por proyecto                                           |
+| `assigneeId` | string | Filtrar por usuario asignado                                   |
+| `tags`       | string | Filtrar por tags (comma-separated): `bug,frontend`             |
+| `limit`      | number | Resultados por página (1-100, default: 20)                     |
+| `cursor`     | string | Cursor para paginación                                         |
+| `sortBy`     | string | Campo de ordenamiento: `createdAt`, `dueDate`, `priority`      |
+| `sortOrder`  | string | `asc` o `desc` (default: `desc`)                               |
 
 **Respuesta (200):**
 
@@ -209,6 +209,7 @@ Authorization: Bearer {token}
 **Respuesta (200):** Objeto `Task` completo.
 
 **Errores:**
+
 - `404` — Tarea no encontrada o sin permisos para verla
 
 ### PUT /tasks/:id — Actualizar tarea
@@ -229,6 +230,7 @@ Content-Type: application/json
 **Respuesta (200):** Objeto `Task` actualizado.
 
 **Errores:**
+
 - `404` — Tarea no encontrada
 - `403` — Sin permisos para editar esta tarea
 
@@ -251,10 +253,10 @@ Authorization: Bearer {token}
 
 ```typescript
 interface Project {
-  id: string;              // "prj_01HXYZ999"
+  id: string; // "prj_01HXYZ999"
   name: string;
   description?: string;
-  ownerId: string;         // Usuario propietario
+  ownerId: string; // Usuario propietario
   members: ProjectMember[];
   taskCount: number;
   createdAt: string;
@@ -394,7 +396,7 @@ let allTasks: Task[] = [];
 do {
   const response = await fetch(
     `/v1/tasks?limit=100${cursor ? `&cursor=${cursor}` : ""}`,
-    { headers: { Authorization: `Bearer ${token}` } }
+    { headers: { Authorization: `Bearer ${token}` } },
   );
   const { data, pagination } = await response.json();
 
@@ -407,16 +409,16 @@ do {
 
 ## Códigos de Error
 
-| Código | Descripción |
-|--------|-------------|
-| `400` | Bad Request — Datos inválidos en el body |
-| `401` | Unauthorized — Token ausente o expirado |
-| `403` | Forbidden — Sin permisos para esta acción |
-| `404` | Not Found — Recurso no existe |
-| `409` | Conflict — El recurso ya existe (ej: email duplicado) |
-| `422` | Unprocessable Entity — Validación fallida |
-| `429` | Too Many Requests — Rate limit excedido |
-| `500` | Internal Server Error — Error del servidor |
+| Código | Descripción                                           |
+| ------ | ----------------------------------------------------- |
+| `400`  | Bad Request — Datos inválidos en el body              |
+| `401`  | Unauthorized — Token ausente o expirado               |
+| `403`  | Forbidden — Sin permisos para esta acción             |
+| `404`  | Not Found — Recurso no existe                         |
+| `409`  | Conflict — El recurso ya existe (ej: email duplicado) |
+| `422`  | Unprocessable Entity — Validación fallida             |
+| `429`  | Too Many Requests — Rate limit excedido               |
+| `500`  | Internal Server Error — Error del servidor            |
 
 ### Formato de error
 

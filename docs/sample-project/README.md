@@ -172,18 +172,18 @@ pm2 save
 
 ## Scripts disponibles
 
-| Script | Descripción |
-|--------|-------------|
-| `npm run dev` | Inicia en modo desarrollo con hot-reload |
-| `npm run build` | Compila TypeScript a JavaScript |
-| `npm start` | Inicia el servidor compilado |
-| `npm test` | Corre todos los tests |
-| `npm run test:watch` | Tests en modo watch |
-| `npm run db:migrate` | Aplica migraciones pendientes |
-| `npm run db:seed` | Carga datos de ejemplo |
-| `npm run db:reset` | Resetea la base de datos (solo desarrollo) |
-| `npm run lint` | Revisa el código con ESLint |
-| `npm run typecheck` | Verifica tipos sin compilar |
+| Script               | Descripción                                |
+| -------------------- | ------------------------------------------ |
+| `npm run dev`        | Inicia en modo desarrollo con hot-reload   |
+| `npm run build`      | Compila TypeScript a JavaScript            |
+| `npm start`          | Inicia el servidor compilado               |
+| `npm test`           | Corre todos los tests                      |
+| `npm run test:watch` | Tests en modo watch                        |
+| `npm run db:migrate` | Aplica migraciones pendientes              |
+| `npm run db:seed`    | Carga datos de ejemplo                     |
+| `npm run db:reset`   | Resetea la base de datos (solo desarrollo) |
+| `npm run lint`       | Revisa el código con ESLint                |
+| `npm run typecheck`  | Verifica tipos sin compilar                |
 
 ## Contribución
 
